@@ -24,6 +24,7 @@ blob = TextBlob(text)
 # Create two empty lists for storing adjectives and nouns
 adjectives = []
 nouns = []
+verbs= []
 
 # TextBlob parses the words and labels them with a part-of-speech tag.
 # This code loops through the whole text, checks for adjectives and nouns
