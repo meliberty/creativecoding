@@ -1,0 +1,74 @@
+from textblob import TextBlob
+import random
+import pycorpora
+import pronouncing
+
+
+template = """
+   A {0} has a busy day
+   It runs through the city of {1} 
+   It eats {2} 
+   A {0} has had a busy day 
+
+"""
+
+
+
+arranged = template.format(get_animal(),get_places(), get_food(), get_vegetables() ) 
+print(arranged)
+from pycorpora import humans, geography
+import random
+def get_food():
+    keepers = []
+    for food in pycorpora.foods.fruits["fruits"]:
+        pronounciation_list = pronouncing.phones_for_word(food)
+        if (len(pronunciation_list) > 0): 
+            syllable_count = pronouncing.syllable_count(pronunciation_list[0])
+            if (syllable_count <= 2):
+                keepers.append(food) 
+    blob = TextBlob(random.choice(keepers))
+      
+    return blob.words[0].pluralize()
+
+def get_city():
+    keepers = []
+    for city in pycorpora.geography.us_cities["cities"]:
+        pronounciation_list = pronouncing.phones_for_word(city['city'])
+        if (len(pronunciation_list) > 0): 
+            syllable_count = pronouncing.syllable_count(pronunciation_list[0])
+            if (syllable_count <= 2):
+                keepers.append(city['city'])
+    return (keepers)
+
+    
+def get_animal():
+    keepers = []
+    for animal in pycorpora.animals.common["animals"]:
+        pronounciation_list = pronouncing.phones_for_word(animal)
+        if (len(pronunciation_list) > 0): 
+            syllable_count = pronouncing.syllable_count(pronunciation_list[0])
+            if (syllable_count <= 2):
+                keepers.append(animal)
+    return random.choice(keepers)    
+    
+    
+def get_vegetables():
+    keepers = []
+    for vegetables in pycorpora.foods.vegetables["vegetables"]:
+        pronounciation_list = pronouncing.phones_for_word(vegetables)
+        if (len(pronunciation_list) > 0): 
+            syllable_count = pronouncing.syllable_count(pronunciation_list[0])
+            if (syllable_count <= 2):
+                keepers.append(vegetables)
+    return random.choice(keepers)    
+    
+    
+    get_animal()
+    get_food()
+    get_places()
+    get_vegetables()
+    pronunciation_list = pronouncing.phones_for_word("monkey")
+pronouncing.syllable_count(pronunciation_list[0])
+
+pronouncing.rhymes("monkey")
+
